@@ -51,24 +51,27 @@ public class Main
         // Variable name: name
         // Data Type: string (names/words are strings)
 
+        String name = "Robin";
 
 
         // 2. Declare a variable to hold your age.
         // Variable name: age
         // Data Type: int (age is a whole number)
 
-
+        int age = 33;
 
         // 3. Declare a variable that holds the first 5 digits of PI.
         // Variable name: pi
         // Data Type: double (pi is a number with decimal places)
 
-
+        double pi = 3.1415;
 
         // 4. Declare a variable holds the price of
         // an adult meal at the buffet.
         // Variable name: price
         // Data Type: double (price contains a dollar and cent value)
+
+        double price = 4.20;
 
         // NOTE: the decimal data type  is not automatically recognized
         // see lecture notes
@@ -98,46 +101,55 @@ public class Main
         // Hint: You cannot use the same variable name
         // as a variable that you have used before.
 
-
+        String favoriteHero = "Batman";
 
         // 6. Declare a variable to hold the value of
         // value of a test score. The test has 100
         // questions and each question is worth 1 point.
         // (You can choose the score)
 
+        int testScore = 100;
+
+        //ASK GREGOR TOMORROW: Would it be best practice to use a short, since we know the variable
+        //will hold a small number?
 
 
         // 7. Declare a variable that holds the current
         // population in the United States.
         // (search what the population is today)
 
-
+        int populationUSA = 333300000;
 
         // 8. Declare a variable that holds the current
         // population in China.
         // (search what the population is today)
 
-
+        int populationChina = 1412000000;
 
         // 9. Declare a variable that holds the current
         // population in the world.
         // (search what the population is today)
 
-
+        long populationEarth = 7951000000L;
 
         // 10. Declare a variable that specifies whether
         // or not your mouse is wireless.
 
-
+        boolean isMouseWireless = false;
 
         // 11. Search what the Latitude and Longitude of your
         // home town are. Then declare 2 variables
         // to store the Latitude and Longitude.
 
+        double latitudeSeattle  = 47.6061;
 
+        double longitudeSeattle = -122.3328;
 
         // 12. Create a variable that holds the current
         // Microsoft stock price.
+
+        double microsoftStockPrice = 444.85;
+
     }
     
     public static void section03()
@@ -175,6 +187,10 @@ public class Main
 
         // How many shots did Pete take?
 
+        int peteShotsMade   = 7;
+        int peteShotsMissed = 3;
+
+        int peteTotalShotsTaken = peteShotsMade + peteShotsMissed;
 
 
         // 14. In his previous basketball game Pete took 20 shots.
@@ -182,6 +198,10 @@ public class Main
 
         // How many 2 point shots did Pete make?\
 
+        peteTotalShotsTaken         = 20;
+        peteShotsMissed             = 6;
+        int peteThreePointShotsMade = 3;
+        int peteTwoPointShotsMade   = peteTotalShotsTaken - peteShotsMissed - peteThreePointShotsMade;
 
 
         // 15. Pete and Pat are teammates. Pete made 6 shots.
@@ -189,6 +209,10 @@ public class Main
 
         // How many total shots did they make?
 
+        peteShotsMade    = 6;
+        int patShotsMade = peteShotsMade * 2;
+
+        int patAndPeteShotsMade = peteShotsMade + patShotsMade;
 
 
         // 16. Pete has made 13 shots, Pat has made 9.
@@ -196,6 +220,15 @@ public class Main
         // before the game ends, how many total shots
         // did the Terrifying Twosome make in the game?
 
+        peteShotsMade = 13;
+        patShotsMade  = 9;
+
+        //Both Pat and Pete make another shot
+
+        peteShotsMade++;
+        patShotsMade++;
+
+        int terrifyingTwosomeTotalShotsMade = peteShotsMade + patShotsMade;
 
 
         // 17. In his last game Pete made 11 shots.
@@ -203,17 +236,36 @@ public class Main
 
         // What percentage of his shots did he make?
 
+        peteShotsMade   = 11;
+        peteShotsMissed = 4;
+        peteTotalShotsTaken = peteShotsMade + peteShotsMissed;
 
+        double petePercentageShotsMade = ((double)peteShotsMade / (double)peteTotalShotsTaken) * 100;
 
 
         // 18. Pete and Pat have decided to only take 3 point
         // shots in their next game. Together they make 70%
         // of their 3 point shots.
 
+
         // The team that they are playing scores 31 points a game.
 
         // How many shots do Pete and Pat have to take to win
         // this game?
+
+        double peteAndPatPercentShotsMade = 0.70;
+        int threePointShotPoints          = 3;
+        int opponentScore                 = 31;
+
+        //The expression below determines the amount of three-point shots Pete and Pat need to make at
+        //their current accuracy (70%) to come within one three-point shot of being in the lead
+
+        int peteAndPatShotsNeededToWin    = (int)((double)opponentScore / threePointShotPoints / peteAndPatPercentShotsMade);
+
+        //Pete and Pat need one more three-pointer to take the lead:
+
+        peteAndPatShotsNeededToWin++;
+
     }
     
     public static void clairesCookies()
