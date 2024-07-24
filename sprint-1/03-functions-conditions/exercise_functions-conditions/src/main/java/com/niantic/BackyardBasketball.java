@@ -23,8 +23,14 @@ public class BackyardBasketball
      *
      */
     public int calculateWinningPercentage(int gamesWon, int gamesLost)
+
     {
-        return 0;
+        int totalGames        = gamesWon + gamesLost;
+
+        int winningPercentage = (int)((double)gamesWon/(double)totalGames * 100);
+
+
+        return winningPercentage;
     }
 
 
@@ -41,9 +47,31 @@ public class BackyardBasketball
      * calculatePointsScored(67, 15, false) -> 20
      *
      */
+
     public int calculatePointsScored(int shotPercentage, int shotsTaken, boolean isThree)
+
     {
-        return 0;
+        //Declare variables for the total number of successful shots, the point-per-shot value, and total points scored:
+        int successfulShots, pointsPerShot, pointsScored;
+
+        //Using the percentage of successful shots, determine how many of the total shots were successful:
+        successfulShots = (int)(shotsTaken * (double)shotPercentage / 100);
+
+        //Using the boolean provided by the user, determine the total points scored:
+        if (isThree)
+        {
+            pointsPerShot = 3;
+        }
+        else
+        {
+            pointsPerShot = 2;
+        }
+
+        //calculate and return the total points scored:
+
+        pointsScored = successfulShots * pointsPerShot;
+
+        return pointsScored;
     }
 
 
@@ -69,6 +97,38 @@ public class BackyardBasketball
      */
     public int calculateShotsRequired(int shotPercentage, int desiredScore, boolean isThree)
     {
-        return 0;
+        //Declare variables to hold number of shots required, the point-per-shot value, and a double to hold
+        // a working value for the shot percentage:
+        int shotsRequired;
+        int pointsPerShot;
+        double accuracy = (double)shotPercentage / 100;
+
+        //Determine point-per-shot value:
+        if (isThree)
+        {
+            pointsPerShot = 3;
+        }
+        else
+        {
+            pointsPerShot = 2;
+        }
+        //Calculate how many shots will be necessary to come as close as possible to the target score without being
+        //able to round up when division is performed (IDK if we're allowed to use the Math library at this point)
+        shotsRequired = (int)((double)desiredScore / (double)pointsPerShot / accuracy);
+
+        //Using the modulo operator, determine if there would have been remainders in the above division and increment
+        //the amount of shots required every time that there would have been a remainder.
+
+        if ((double)desiredScore % (double)pointsPerShot > 0)
+        {
+            shotsRequired++;
+        }
+
+        if (((double)desiredScore / (double)pointsPerShot) % accuracy > 0)
+        {
+            shotsRequired++;
+        }
+
+        return shotsRequired;
     }
 }

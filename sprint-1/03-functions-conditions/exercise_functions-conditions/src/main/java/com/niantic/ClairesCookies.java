@@ -20,8 +20,16 @@ public class ClairesCookies
      * calculateSubtotal(5) -> 64.75
      */
     public double calculateSubtotal(int quantity)
+
     {
-        return 0;
+        //Declare variables:
+        double pricePerDozen = 12.95;
+        double totalPrice = 0.0;
+
+        //Calculate subtotal:
+        totalPrice = pricePerDozen * quantity;
+
+        return totalPrice;
     }
 
     /*
@@ -42,8 +50,12 @@ public class ClairesCookies
      * calculateTotal(5) -> 68.47
      */
     public double calculateTotal(int quantity)
+
     {
-        return 0;
+        //Declare variable for the total price
+        double totalPrice = calculateSubtotal(quantity);
+        totalPrice += totalPrice * TaxRate;
+        return totalPrice;
     }
 
     /*
@@ -74,8 +86,21 @@ public class ClairesCookies
      * calculateQuickOrder(2,0,2) -> 61.12
      */
     public double calculateQuickOrder(int snickerDozen, int chocolateDozen, int frostedDozen)
+
     {
-        return 0;
+        //Declare variables for subtotal and total price:
+        double subTotal, total;
+        //Declare the prices for each type of cookie:
+        double snickerPrice   = 12.95;
+        double chocolatePrice = 13.95;
+        double frostedPrice   = 15.95;
+
+        //Calculate subtotal:
+        subTotal = (snickerPrice * snickerDozen) + (chocolatePrice * chocolateDozen) + (frostedPrice * frostedDozen);
+        //Calculate total:
+        total = subTotal + (subTotal * TaxRate);
+
+        return total;
     }
 
 
@@ -102,8 +127,31 @@ public class ClairesCookies
      * calculateCustomOrder (5, true, false) -> 73.76
      */
     public double calculateCustomOrder (int quantity, boolean hasChocolateChips, boolean hasFrosting)
+
     {
-        return 0;
+        //Declare variables for the subtotal of a custom order, the total after tax, and the total amount of additional
+        // charges from extra toppings:
+        double subTotal     = 0;
+        double customTotal  = 0;
+        double extraCharges = 0;
+        double basePrice    = 12.95;
+
+        //determine if there are additional charges:
+        if(hasChocolateChips)
+            {
+                extraCharges += 1;
+            }
+        if(hasFrosting)
+            {
+                extraCharges += 2;
+            }
+
+        //calculate the subtotal:
+        subTotal = (basePrice + extraCharges) * quantity;
+        //Calculate the total after tax:
+        customTotal = subTotal + (subTotal*TaxRate);
+
+        return customTotal;
     }
 
 }
