@@ -110,10 +110,6 @@ public class Main
 
         int testScore = 100;
 
-        //ASK GREGOR TOMORROW: Would it be best practice to use a short, since we know the variable
-        //will hold a small number?
-
-
         // 7. Declare a variable that holds the current
         // population in the United States.
         // (search what the population is today)
