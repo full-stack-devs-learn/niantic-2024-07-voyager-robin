@@ -16,7 +16,7 @@ public class Main
             switch(choice)
             {
                 case 1:
-                    createNewTestScores();
+                    scores = createNewTestScores();
                     break;
                 case 2:
                     calculateAverage();
@@ -27,7 +27,7 @@ public class Main
                 case 4:
                     findLowestScore();
                     break;
-                case 5:
+                case 0:
                     System.out.println("Thanks for playing!");
                     System.out.println("Good bye!");
                     System.exit(0);
@@ -41,7 +41,7 @@ public class Main
     public static int getHomeSelection()
     {
         System.out.println();
-        System.out.println("Welcome to <<Enter app name>>!");
+        System.out.println("Welcome to Robin's Test Score App!");
         System.out.println("------------------------------");
         System.out.println();
         System.out.println("What would you like to do?");
@@ -55,23 +55,88 @@ public class Main
         return Integer.parseInt(userInput.nextLine());
     }
 
-    private static void createNewTestScores()
+    public static int[] createNewTestScores()
     {
-        System.out.println("Enter code to create a new array and ask for test scores");
+        //Declare variables to hold number of test scores and the scores themselves:
+        int numberOfTests = 0;
+        int[] testScores;
+
+        //Query user for number of tests:
+        System.out.println();
+        System.out.println("How many tests are we evaluating?");
+        numberOfTests = (userInput.nextInt());
+        userInput.nextLine();
+        System.out.println();
+
+        //Size array using the length given by the user:
+        testScores  = new int[numberOfTests];
+
+        //Query user for test scores and enter scores into array:
+        for (int i = 0; i < numberOfTests; i++)
+        {
+            System.out.println("Please enter the next test score:");
+            testScores[i] = (userInput.nextInt());
+            userInput.nextLine();
+        }
+
+        //Return the result:
+        return testScores;
     }
 
     private static void calculateAverage()
     {
-        System.out.println("Add logic to calculate the average of all test scores, and display it");
+        int sum = 0;
+        double average = 0.0;
+
+        //Add together the test scores, then divide by the amount to find the average:
+        for (int entry : scores)
+        {
+            sum += entry;
+        }
+
+        average = (double)sum / scores.length;
+
+        //Output the result:
+        System.out.println();
+        System.out.println("The average score is: " + average);
     }
 
     private static void findHighestScore()
     {
-        System.out.println("Find the highest score of all tests and display it");
+        int highestScore = scores[0];
+
+        //Loop through the scores array, replacing highestScore with any higher score:
+
+        for (int entry : scores)
+        {
+            if (entry > highestScore)
+            {
+                highestScore = entry;
+            }
+        }
+
+
+        //Output the result:
+        System.out.println();
+        System.out.println("The highest score is: " + highestScore);
     }
 
     private static void findLowestScore()
     {
-        System.out.println("Find the lowest score of all tests and display it");
+        int lowestScore = scores[0];
+
+        //Loop through the array, replacing lowestScore with any lower score:
+
+        for (int entry : scores)
+        {
+            if (entry < lowestScore)
+            {
+                lowestScore = entry;
+            }
+        }
+
+        //Print the result:
+        System.out.println();
+        System.out.println("The lowest score is: " + lowestScore);
     }
 }
