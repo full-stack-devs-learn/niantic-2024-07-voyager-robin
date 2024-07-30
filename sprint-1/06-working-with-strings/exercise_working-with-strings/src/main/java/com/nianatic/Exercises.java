@@ -17,8 +17,21 @@ public class Exercises
      *
      */
     public String changeCase(String word, boolean toUpperCase)
+
     {
-        return null;
+        String outputWord;
+
+        //Check the given boolean and change case as necessary
+        if (toUpperCase)
+        {
+            outputWord = word.toUpperCase();
+        }
+        else
+        {
+            outputWord = word.toLowerCase();
+        }
+        //Return the formatted output
+        return outputWord;
     }
 
     /*
@@ -49,7 +62,15 @@ public class Exercises
      */
     public String createHtml(String content, String elementName)
     {
-        return null;
+        //Declare variables to hold the opening and closing tabs, and use the elementName
+        //to correctly format them.
+        String openingTab = "<"+elementName+">";
+        String closingTab = "</"+elementName+">";
+
+        //Declare and format the output, then return it
+        String outputContent = openingTab+content+closingTab;
+
+        return outputContent;
     }
 
     /*
@@ -71,7 +92,23 @@ public class Exercises
      */
     public String moreHtml(String content, String elementName)
     {
-        return null;
+        String outputContent;
+
+        //Use boolean logic to determine if content is blank; if it is, make the output
+        //the correct self-closing tab. If not, call the previous function to create
+        //formatted HTML.
+
+        if (content.equals(""))
+        {
+            outputContent = "<"+elementName+" />";
+        }
+        else
+        {
+            outputContent = createHtml(content, elementName);
+        }
+
+        //Return the formatted HTML
+        return outputContent;
     }
 
     /*
@@ -94,7 +131,20 @@ public class Exercises
      */
     public String createXml(int id, String name)
     {
-        return  null;
+        //Declare and create variables to store the opening and closing
+        //tabs.
+        String customerOpeningTag = "<customer>";
+        String customerClosingTag = "</customer>";
+        String idOpeningTag       = "<id>";
+        String idClosingTag       = "</id>";
+        String nameOpeningTag     = "<name>";
+        String nameClosingTag     = "</name>";
+
+        //Declare and format the output
+        String formattedOutput = customerOpeningTag + idOpeningTag + id + idClosingTag + nameOpeningTag + name + nameClosingTag + customerClosingTag;
+
+
+        return formattedOutput;
     }
 
     /*
@@ -131,7 +181,18 @@ public class Exercises
      */
     public String formattedXml(int id, String name)
     {
-        return null;
+        //Declare and create variables to store the opening and closing
+        //tabs.
+        String customerOpeningTag = "<customer>";
+        String customerClosingTag = "</customer>";
+        String idOpeningTag       = "<id>";
+        String idClosingTag       = "</id>";
+        String nameOpeningTag     = "<name>";
+        String nameClosingTag     = "</name>";
+
+        //Declare and format the output
+        String formattedOutput = customerOpeningTag + "\n" + "  " + idOpeningTag + id + idClosingTag + "\n" + "  " + nameOpeningTag + name + nameClosingTag + "\n" + customerClosingTag;
+        return formattedOutput;
     }
 
     /*
@@ -155,7 +216,31 @@ public class Exercises
      */
     public String formatFullName(String firstName, String middleName, String lastName, String suffix)
     {
-        return  null;
+        //Declare a variable to hold the formatted name, and populate it with the
+        //first name, which will always be present and first in the formatted output.
+        String formattedName = firstName + " ";
+
+        //If there is a middle name, append it now. If not, skip it and append the last name.
+        if (middleName.isEmpty())
+        {
+            formattedName += lastName;
+        }
+        else
+        {
+            formattedName += middleName + " " + lastName;
+        }
+
+        //Similarly to the middle name, check if there is a suffix and append it if so.
+        //Either way, return the formatted name.
+        if (suffix.isEmpty())
+        {
+            return formattedName;
+        }
+        else
+        {
+            formattedName += ", " + suffix;
+            return formattedName;
+        }
     }
 
     /*
@@ -186,6 +271,48 @@ public class Exercises
      */
     public String createUserName(String fullName)
     {
-        return null;
+        //Declare a string array to hold the full name, split by whitespaces, and a variable to hold
+        //the output, beginning with the first name and period.
+        String[] nameArray = fullName.split(" ");
+        String formattedUsername = nameArray[0].toLowerCase() + ".";
+
+        //We assume that user must give a first and last name, so if the above array is only of length 2,
+        //nameArray[1] is the last name and there is no suffix. Create and return the formatted username.
+        if(nameArray.length == 2)
+        {
+            formattedUsername += nameArray[1].toLowerCase();
+            return formattedUsername;
+        }
+
+        // If the above array is of a length greater than 2, we have a middle name and/or a suffix.
+        else if (!nameArray[1].contains(","))
+        {
+            // If the string in nameArray[1] does not contain a comma, it is a middle name and nameArray[2]
+            // is the last name.
+            //Add the first letter of the middle name
+            formattedUsername += nameArray[1].toLowerCase().charAt(0) + ".";
+            //Check to see if the last name contains a comma. If it does, there is a suffix at the end
+            //which does not go into the username.
+            if (nameArray[2].contains(","))
+            {
+                //Add the last name, ignoring the comma, and return the username
+                int commaIndex = nameArray[1].indexOf(",");
+                formattedUsername += nameArray[1].substring(0,commaIndex).toLowerCase();
+                return formattedUsername;
+            }
+            else
+            {
+                //If the last name has no comma, append it normally.
+                formattedUsername += nameArray[2].toLowerCase();
+                return formattedUsername;
+            }
+        }
+        else
+        {
+            //If the string in nameArray[1] does have a comma, it is a last name followed by a suffix.
+            int commaIndex = nameArray[1].indexOf(",");
+            formattedUsername += nameArray[1].substring(0,commaIndex).toLowerCase();
+            return formattedUsername;
+        }
     }
 }
