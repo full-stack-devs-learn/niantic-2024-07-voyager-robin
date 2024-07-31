@@ -5,4 +5,11 @@ USE northwind;
 -- in their title
 
 -- Expected: 17 rows
+-- Correction: 33 rows
 
+SELECT company_name
+	, contact_name
+    , contact_title
+    , phone
+FROM customers
+WHERE contact_title LIKE '%Manager';
