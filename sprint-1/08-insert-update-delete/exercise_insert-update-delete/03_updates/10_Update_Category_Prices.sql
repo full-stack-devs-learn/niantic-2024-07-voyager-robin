@@ -4,3 +4,6 @@ USE northwind;
 -- within a category by a certain percent.
 -- use variables to accept the Category name and the percent increase 
 
+SELECT *
+FROM products;
+
