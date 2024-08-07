@@ -11,8 +11,16 @@ public class ArrayListIntro
     Return the list.
      */
     public ArrayList<String> getHeroesList()
+
     {
-        return null;
+        ArrayList<String> heroesList = new ArrayList<String>();
+        heroesList.add("Batman");
+        heroesList.add("Marsha P. Johnson");
+        heroesList.add("Robin Hood");
+        heroesList.add("John Brown");
+        heroesList.add("Frida Kahlo");
+
+        return heroesList;
     }
 
     /*
@@ -23,8 +31,21 @@ public class ArrayListIntro
        findEvens( [21, 98, 78, 5, 6, 8] )   ->  [98, 78, 6, 8]
      */
     public ArrayList<Integer> findEvens(ArrayList<Integer> numbers)
+
     {
-        return null;
+        //Declare the array list to hold just the even numbers
+        ArrayList<Integer> evensList = new ArrayList<Integer>();
+
+        for (Integer number : numbers)
+        {
+            //Use the modulo operator on each number to determine
+            //if its even:
+            if (number % 2 == 0)
+            {
+                evensList.add(number);
+            }
+        }
+        return evensList;
     }
 
     /*
@@ -35,7 +56,16 @@ public class ArrayListIntro
      */
     public int sum(ArrayList<Integer> numbers)
     {
-        return 0;
+        //Declare a variable to hold the result
+        int sum = 0;
+
+        //For each number provided, add it to the sum:
+        for (Integer number : numbers)
+        {
+            sum += number;
+        }
+
+        return sum;
     }
 
     /*
@@ -46,7 +76,20 @@ public class ArrayListIntro
      */
     public int max(ArrayList<Integer> numbers)
     {
-        return 0;
+        //Declare a variable to hold the highest number,
+        //initializing that variable to the minimum integer value.
+        int highestValue = Integer.MIN_VALUE;
+
+        //For each provided number, assign it to highestValue if it's
+        //higher than the current value:
+        for (Integer number : numbers)
+        {
+            if (number > highestValue)
+            {
+                highestValue = number;
+            }
+        }
+        return highestValue;
     }
 
     /*
@@ -57,7 +100,20 @@ public class ArrayListIntro
      */
     public int min(ArrayList<Integer> numbers)
     {
-        return 0;
+        //Declare a variable to hold the lowest number,
+        //initializing that variable to the maximum integer value.
+        int lowestValue = Integer.MAX_VALUE;
+
+        //For each provided number, assign it to lowestValue if it's
+        //lower than the current value:
+        for (Integer number : numbers)
+        {
+            if (number < lowestValue)
+            {
+                lowestValue = number;
+            }
+        }
+        return lowestValue;
     }
 
     /*
@@ -69,7 +125,18 @@ public class ArrayListIntro
      */
     public int average(ArrayList<Integer> numbers)
     {
-        return 0;
+        //Declare a variable to hold the average:
+        int average = 0;
+
+        //Use the above sum function to find the sum of the
+        //provided array list:
+        average = sum(numbers);
+
+        //Divide this sum by the amount of numbers in the
+        //array list to find the average:
+        average = average / numbers.size();
+
+        return average;
     }
 
     /*
@@ -88,6 +155,19 @@ public class ArrayListIntro
      */
     public ArrayList<Integer> buildFibonacci(int size)
     {
-        return null;
+        //Declare the array list to hold the sequence:
+        ArrayList<Integer> fibonacciSequence = new ArrayList<Integer>();
+        fibonacciSequence.add(0);
+        fibonacciSequence.add(1);
+
+        //Use the size specified by the user to populate
+        //the rest of the sequence:
+        for (int i = 2; i < size; i++)
+        {
+            int nextNumber = fibonacciSequence.get(i-2) + fibonacciSequence.get(i-1);
+            fibonacciSequence.add(nextNumber);
+        }
+
+        return fibonacciSequence;
     }
 }

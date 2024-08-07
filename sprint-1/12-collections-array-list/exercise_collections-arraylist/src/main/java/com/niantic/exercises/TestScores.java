@@ -3,6 +3,7 @@ package com.niantic.exercises;
 import com.niantic.models.TestScore;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class TestScores
 {
@@ -13,8 +14,22 @@ public class TestScores
         requested tests.
      */
     public ArrayList<TestScore> getScoresByTest(ArrayList<TestScore> testScores, String testName)
+
     {
-        return null;
+        //Declare an arrayList to hold the output:
+        ArrayList<TestScore> outputScores = new ArrayList<>();
+
+        //For each test provided, add the test to our output list if it's
+        //name matches the name provided.
+        for (TestScore test : testScores)
+        {
+            if (Objects.equals(test.getTestName(), testName))
+            {
+                outputScores.add(test);
+            }
+        }
+
+        return outputScores;
     }
 
     /*
@@ -24,7 +39,20 @@ public class TestScores
      */
     public ArrayList<TestScore> getScoresByStudent(ArrayList<TestScore> testScores, String student)
     {
-        return null;
+        //Declare an arrayList to hold the output:
+        ArrayList<TestScore> outputScores = new ArrayList<>();
+
+        //For each test provided, add the test to our output list if the
+        //student's name matches the name provided.
+        for (TestScore test : testScores)
+        {
+            if (Objects.equals(test.getStudentName(), student))
+            {
+                outputScores.add(test);
+            }
+        }
+
+        return outputScores;
     }
 
     /*
@@ -33,7 +61,20 @@ public class TestScores
      */
     public int getHighestScore(ArrayList<TestScore> testScores)
     {
-        return 0;
+        //Declare a variable to hold the highest number,
+        //initializing that variable to the minimum integer value.
+        int highestTest = Integer.MIN_VALUE;
+
+        //For each provided number, assign it to highestValue if it's
+        //higher than the current value:
+        for (TestScore score : testScores)
+        {
+            if (score.getScore() > highestTest)
+            {
+                highestTest = score.getScore();
+            }
+        }
+        return highestTest;
     }
 
     /*
@@ -42,7 +83,21 @@ public class TestScores
      */
     public int getLowestScore(ArrayList<TestScore> testScores)
     {
-        return 0;
+        //Declare a variable to hold the highest number,
+        //initializing that variable to the minimum integer value.
+        int lowestTest = Integer.MAX_VALUE;
+
+        //For each provided number, assign it to highestValue if it's
+        //higher than the current value:
+        for (TestScore score : testScores)
+        {
+            if (score.getScore() < lowestTest)
+            {
+                lowestTest = score.getScore();
+            }
+        }
+
+        return lowestTest;
     }
 
     /*
@@ -51,7 +106,20 @@ public class TestScores
      */
     public int getAverageScore(ArrayList<TestScore> testScores)
     {
-        return 0;
+        //Declare a variable to hold the average:
+        int average = 0;
+
+        //For each test score, add its value to the average variable:
+        for (TestScore score : testScores)
+        {
+            average += score.getScore();
+        }
+
+        //Divide this sum by the amount of scores provided
+        // to find the average:
+        average = average / testScores.size();
+
+        return average;
     }
 
     /*
@@ -60,7 +128,17 @@ public class TestScores
      */
     public int getHighestScoreByTest(ArrayList<TestScore> testScores, String testName)
     {
-        return 0;
+        //Declare an arrayList to hold the scores sorted by test, and an
+        // integer to hold the highest score itself:
+        ArrayList<TestScore> scoresByTest = new ArrayList<TestScore>();
+        int outputScore = 0;
+
+        //Use the above methods to sort the tests by name and filter for the
+        //highest score:
+        scoresByTest = getScoresByTest(testScores, testName);
+        outputScore = getHighestScore(scoresByTest);
+
+        return outputScore;
     }
 
     /*
@@ -69,7 +147,17 @@ public class TestScores
      */
     public int getLowestScoreByTest(ArrayList<TestScore> testScores, String testName)
     {
-        return 0;
+        //Declare an arrayList to hold the scores sorted by test, and an
+        //integer to hold the lowest score itself:
+        ArrayList<TestScore> scoresByTest = new ArrayList<TestScore>();
+        int outputScore = 0;
+
+        //Use the above methods to sort the tests by name and filter for the
+        //lowest score:
+        scoresByTest = getScoresByTest(testScores, testName);
+        outputScore = getLowestScore(scoresByTest);
+
+        return outputScore;
     }
 
     /*
@@ -78,7 +166,17 @@ public class TestScores
      */
     public int getAverageScoreByTest(ArrayList<TestScore> testScores, String testName)
     {
-        return 0;
+        //Declare an arrayList to hold the scores sorted by test, and an
+        //integer to hold the average score itself:
+        ArrayList<TestScore> scoresByTest = new ArrayList<TestScore>();
+        int outputScore = 0;
+
+        //Use the above methods to sort the tests by name and calculate the
+        //average score:
+        scoresByTest = getScoresByTest(testScores, testName);
+        outputScore = getAverageScore(scoresByTest);
+
+        return outputScore;
     }
 
     /*
@@ -87,7 +185,17 @@ public class TestScores
      */
     public int getHighestScoreByStudent(ArrayList<TestScore> testScores, String student)
     {
-        return 0;
+        //Declare an arrayList to hold the scores sorted by student, and an
+        //integer to hold the highest score itself:
+        ArrayList<TestScore> scoresByStudent = new ArrayList<TestScore>();
+        int outputScore = 0;
+
+        //Use the above methods to sort the tests by name and filter for the
+        //highest score:
+        scoresByStudent = getScoresByStudent(testScores, student);
+        outputScore = getHighestScore(scoresByStudent);
+
+        return outputScore;
     }
 
     /*
@@ -96,7 +204,17 @@ public class TestScores
      */
     public int getLowestScoreByStudent(ArrayList<TestScore> testScores, String student)
     {
-        return 0;
+        //Declare an arrayList to hold the scores sorted by student, and an
+        //integer to hold the lowest score itself:
+        ArrayList<TestScore> scoresByStudent = new ArrayList<TestScore>();
+        int outputScore = 0;
+
+        //Use the above methods to sort the tests by name and filter for the
+        //lowest score:
+        scoresByStudent = getScoresByStudent(testScores, student);
+        outputScore = getLowestScore(scoresByStudent);
+
+        return outputScore;
     }
 
     /*
@@ -105,6 +223,16 @@ public class TestScores
      */
     public int getAverageScoreByStudent(ArrayList<TestScore> testScores, String student)
     {
-        return 0;
+        //Declare an arrayList to hold the scores sorted by student, and an
+        //integer to hold the calculated average:
+        ArrayList<TestScore> scoresByStudent = new ArrayList<TestScore>();
+        int outputScore = 0;
+
+        //Use the above methods to sort the tests by name and calculate the
+        //average score:
+        scoresByStudent = getScoresByStudent(testScores, student);
+        outputScore = getAverageScore(scoresByStudent);
+
+        return outputScore;
     }
 }
