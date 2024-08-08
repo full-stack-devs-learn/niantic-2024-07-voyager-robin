@@ -63,9 +63,30 @@ public class CategoryDao
 
     Execute the query, then return a Category object from the results
      */
-    public Category getCategoryById(int categoryId)
+    public Category getCategoryById(int queryId)
     {
-        return null;
+        //Declare a category object to hold the output
+        Category outputCategory = new Category();
+
+        // declare and execute the SQL query:
+        String sql = """
+                        SELECT category_id, category_name, description
+                        FROM categories
+                        WHERE category_id = ?;
+                        """;
+
+        SqlRowSet row = jdbcTemplate.queryForRowSet(sql, queryId);
+
+        //Declare a category from each row and add it to the output category object
+        while(row.next())
+        {
+            outputCategory = new Category(row.getInt("category_id"),
+                                          row.getString("category_name"),
+                                          row.getString("description"));
+        }
+
+        // return the category
+        return outputCategory;
     }
 
     /*
@@ -75,6 +96,21 @@ public class CategoryDao
      */
     public void addCategory(Category category)
     {
+        //Declare variables to hold the category's values
+        int outputId                     = category.getCategoryId();
+        String outputCategoryName        = category.getCategoryName();
+        String outputCategoryDescription = category.getDescription();
+
+
+        // declare and execute the SQL query:
+        String sql = """
+                        INSERT INTO categories
+                        (category_id, category_name, description)
+                        VALUES (?, ?, ?);
+                        """;
+
+        var row = jdbcTemplate.update(sql,
+                        outputId, outputCategoryName, outputCategoryDescription);
     }
 
     /*
@@ -84,6 +120,24 @@ public class CategoryDao
      */
     public void updateCategory(Category category)
     {
+        //Declare variables to hold the category's values
+        int queryCategoryId              = category.getCategoryId();
+        String outputCategoryName        = category.getCategoryName();
+        String outputCategoryDescription = category.getDescription();
+
+
+        // declare and execute the SQL query:
+        String sql = """
+                        UPDATE categories
+                        SET category_name = ?, 
+                            description = ?
+                        WHERE category_id = ?;
+                        """;
+
+        var row = jdbcTemplate.update(sql,
+                    outputCategoryName,
+                    outputCategoryDescription,
+                    queryCategoryId);
     }
 
     /*
@@ -92,7 +146,13 @@ public class CategoryDao
      */
     public void deleteCategory(int categoryId)
     {
+        // declare and execute the SQL query:
+        String sql = """
+                        DELETE FROM categories
+                        WHERE category_id = ?;
+                        """;
+
+        var row = jdbcTemplate.update(sql,
+                categoryId);
     }
-
-
 }
