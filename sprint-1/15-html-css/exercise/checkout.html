@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<link rel="stylesheet" href="css/index.css">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<header>
+  <title>Checkout</title>
+
+  <h1 id="site-title">Praxis Pies</h1>   
+</header>
+
+<!--Navigation section w/ links to other pages-->
+
+<nav class="head-nav-bar">
+  <ul class="nav-bar-ul">
+      <li id="nav-page-btn" onclick="location.href='/index.html'">
+          <p3>Home</p3>
+      </li>
+       <li id="nav-page-btn" onclick="location.href='/details.html'">
+          <p3>Menu</p3>
+      </li
+      ><li id="this-page-btn" onclick="location.href='/checkout.html'">
+          <p3>Checkout</p3>
+      </li>
+      <li>
+          <!-- Spacer list item -->
+      </li>
+  </ul>
+</nav>
+
+<body>
+  <div id="checkout">
+    <!--  - A heading with "Checkout".
+          - A form with fields for customer name, 
+            address, and payment information.
+          - A dropdown menu with a list of available 
+            pizzas. -->
+
+            <h2>
+              Checkout
+            </h2>
+            <div id="cust-info">
+              <input name="customer_name" placeholder="Name">
+              <input name="customer_address" placeholder="Address">
+              <input name="payment_info" placeholder = "Payment Information">
+            </div>
+            <!-- Dropdown Menu for Ordering: -->
+            
+            <br><br>
+            <label>Pick your Pie!</label>
+            <br><br>
+            <select name="pizzas" id="pizzas">
+              <option value="Five-Chz">Five-Chz</option>
+              <option value="Pineapple & Jalapeno">Pineapple & Jalapeno</option>
+              <option value="Margherita">Margherita</option>
+              <option value="Pepper & Olive">Roasted Red Pepper & Black Olive</option>
+              <option value="Veggiegeddon">Veggiegeddon</option>
+              <option value="Buffalo Seitan">Buffalo Seitan</option>
+            </select>
+  </div>
+</body>
+
+<footer>
+  <div id="contact-info"> 
+      <h4>Contact Us:</h4>
+      <p2>206-555-1234</p2> 
+  </div>
+ <!-- Contains contact information 
+       and social media links. -->
+       <ul id="social_media_list">
+          <li id="twitter">
+              twitter
+          </li>
+          <li id="instagram">
+              Instagram
+          </li>
+          <li id="facebook">
+              Facebook
+          </li>
+          <li id="tumblr">
+              Tumblr
+          </li>
+       </ul>
+</footer>
+
+</html>

@@ -64,6 +64,4 @@ public class BudgetTracker
         System.out.print("Enter an option: ");
         return Integer.parseInt(userInput.nextLine());
     }
-
-
 }
