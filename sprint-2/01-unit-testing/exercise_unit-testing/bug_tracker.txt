@@ -5,32 +5,52 @@ Class: Rectangle
     Bug 1:
 
         Describe the bug/error:
+            * Perimeter isn't calculated correctly; expected value is
+              2 * width + 2 * height, while actual value is width + height.
 
         Where was the bug? (function, line number)
+            * getPerimeter(), line 57
 
         What test helped you find the bug?
+            * isPerimeterCalculatedCorrectly()
 
         What did you do to fix the bug?
+            * Replaced "return width + height;" with
+              "return (2 * width) + (2 * height);"
 
     Bug 2:
 
         Describe the bug/error:
+            * Area does not default to 0 if width or height are negative.
 
         Where was the bug? (function, line number)
+            * getArea(), line 42
 
         What test helped you find the bug?
+            * areAreaAndPerimeterPositive()
 
         What did you do to fix the bug?
+            * replaced "return width * height;" with
+                       "if(width <= 0 || height <= 0)
+                           {
+                               return 0;
+                           }
+                       return width * height;"
 
     Bug 3:
 
         Describe the bug/error:
+            * Gregor said there was no third bug in this class,
+            but class variables are declared publicly rather than privately
 
         Where was the bug? (function, line number)
+            * Rectangle.java, lines 5 & 6
 
         What test helped you find the bug?
+            * Jane pointed it out after asking Gregor about the number of bugs
 
         What did you do to fix the bug?
+            * Replaced "public" with "private" for all class variable declarations.
 
 
 
@@ -40,22 +60,52 @@ Class: Quiz
     Bug 1:
 
         Describe the bug/error:
+            * The calculation for percentage score returns zero unless the score
+              is 100%; this is due to the int datatype cutting off decimal points
+              mid-calculation.
 
         Where was the bug? (function, line number)
+            * getPercent, line 37
 
         What test helped you find the bug?
+            * isPercentageCalculatedCorrectly()
 
         What did you do to fix the bug?
+            * typecast score to double in the calculation, then typecast the entire result back to
+              int to conform with the datatype used.
 
     Bug 2:
 
         Describe the bug/error:
+            * The letter grade function incorrectly assigns
+              'B' to a score of 90, 'C' to a score of 80, etc.
 
         Where was the bug? (function, line number)
+            * getLetterGrade(), lines 44-47
 
         What test helped you find the bug?
+            * isLetterGradeCorrect()
 
         What did you do to fix the bug?
+            * in the if-else block of getLetterGrade, replace
+              '>' with '>=' on lines 44-47.
+
+    Bugs 3 & 4:
+
+            Describe the bug/error:
+                * There is no code that guarantees that possiblePoints
+                  and score are positive.
+
+            Where was the bug? (function, line number)
+                * setScore(), line 16
+                  Quiz constructor, line 31
+
+            What test helped you find the bug?
+                * isScorePositive(), isPossiblePointsPositive()
+
+            What did you do to fix the bug?
+                * Added an if-clause to change negative values to
+                  positive ones while printing out an error message.
 
 
 *** Optional / Challenge ***

@@ -14,7 +14,7 @@ public class ProductDao
 
     public ProductDao()
     {
-        String databaseUrl = "jdbc:mysql://localhost:3306/northwind";
+        String databaseUrl = "jdbc:mysql://localhost:3306/Northwind";
         String userName = "root";
         String password = "P@ssw0rd";
         DataSource dataSource = new BasicDataSource(){{
