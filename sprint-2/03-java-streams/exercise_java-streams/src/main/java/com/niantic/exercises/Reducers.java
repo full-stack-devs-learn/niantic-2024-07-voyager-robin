@@ -2,6 +2,7 @@ package com.niantic.exercises;
 
 import com.niantic.models.LineItem;
 
+import java.util.Comparator;
 import java.util.List;
 
 public class Reducers
@@ -16,7 +17,11 @@ public class Reducers
      */
     public double totalSales(List<LineItem> lineItems)
     {
-        return 0;
+        double salesSum = lineItems.stream()
+                                   .map(item -> item.getLineTotal())
+                                   .reduce(0.0, (currentSum, nextItem)
+                                           -> currentSum + nextItem);
+        return salesSum;
     }
 
     /*
@@ -26,7 +31,14 @@ public class Reducers
      */
     public double averageSalesPerLineItem(List<LineItem> lineItems)
     {
-        return 0;
+        double salesSum = lineItems.stream()
+                                   .map(item -> item.getLineTotal())
+                                   .reduce(0.0, (currentSum, nextItem)
+                                           -> currentSum + nextItem);
+
+        double salesAverage = salesSum / lineItems.size();
+
+        return salesAverage;
     }
 
     /*
@@ -40,7 +52,21 @@ public class Reducers
      */
     public double averageSalesPerItem(List<LineItem> lineItems)
     {
-        return 0;
+        // Determine total sales:
+        double salesSum = lineItems.stream()
+                                    .map(item -> item.getLineTotal())
+                                    .reduce(0.0, (currentSum, nextItem)
+                                            -> currentSum + nextItem);
+
+        // Determine total number of items:
+        int itemsQuantity = lineItems.stream()
+                                .map(item -> item.getQuantity())
+                                .reduce(0, (currentSum, nextItem)
+                                        -> currentSum + nextItem);
+
+        double salesAverage = salesSum / itemsQuantity;
+
+        return salesAverage;
     }
 
     /*
@@ -52,7 +78,11 @@ public class Reducers
      */
     public int totalItemCount(List<LineItem> lineItems)
     {
-        return 0;
+        int itemsQuantity = lineItems.stream()
+                                     .map(item -> item.getQuantity())
+                                     .reduce(0, (currentSum, nextItem)
+                                             -> currentSum + nextItem);
+        return itemsQuantity;
     }
 
     /*
@@ -62,7 +92,15 @@ public class Reducers
      */
     public double averageItemCount(List<LineItem> lineItems)
     {
-        return 0;
+        // Determine total number of items:
+        double itemsQuantity = lineItems.stream()
+                                        .map(item -> item.getQuantity())
+                                        .reduce(0, (currentSum, nextItem)
+                                                -> currentSum + nextItem);
+
+        double itemsAverage = itemsQuantity / lineItems.size();
+
+        return itemsAverage;
     }
 
     /*
@@ -71,7 +109,10 @@ public class Reducers
      */
     public double maxLineItem(List<LineItem> lineItems)
     {
-        return 0;
+        double maxPrice = lineItems.stream()
+                                   .map(item -> item.getLineTotal())
+                                   .max(Double::compare).get();
+        return maxPrice;
     }
 
     /*
@@ -82,7 +123,11 @@ public class Reducers
      */
     public double minLineItem(List<LineItem> lineItems)
     {
-        return 0;
+        double minPrice = lineItems.stream()
+                                   .map(item -> item.getLineTotal())
+                                   .min(Double::compare).get();
+
+        return minPrice;
     }
 
 }
