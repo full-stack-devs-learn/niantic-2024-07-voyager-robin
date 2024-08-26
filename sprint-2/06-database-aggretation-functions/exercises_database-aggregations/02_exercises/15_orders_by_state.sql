@@ -15,7 +15,12 @@
 
 -- (8 row)
 
-
+SELECT DISTINCT region
+	 , COUNT(DISTINCT order_id)
+FROM customer_orders
+WHERE country LIKE 'USA'
+GROUP BY region
+ORDER BY COUNT(DISTINCT order_id) DESC;
 
 
 

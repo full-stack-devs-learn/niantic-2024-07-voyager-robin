@@ -4,6 +4,8 @@
 
 -- (1 row) - $60616.51
 
-
+SELECT SUM(sales_price * quantity) AS 'Total UK sales'
+FROM customer_orders
+WHERE country LIKE 'UK'
 
 
