@@ -4,32 +4,20 @@ import java.util.ArrayList;
 
 public class Hand
 {
-    private final ArrayList<Card> cards = new ArrayList<>();
+    private final ArrayList<Card> cardsInHand = new ArrayList<>();
 
     public ArrayList<Card> getCards()
     {
-        return cards;
-    }
-
-    public int getPointValue()
-    {
-        // return sum of all card points
-        int sum = 0;
-
-        for(Card card : cards)
-        {
-            sum += card.getValue();
-        }
-        return sum;
+        return cardsInHand;
     }
 
     public int getCardCount()
     {
-        return cards.size();
+        return cardsInHand.size();
     }
 
     public void dealTo(Card card)
     {
-        cards.add(card);
+        cardsInHand.add(card);
     }
 }

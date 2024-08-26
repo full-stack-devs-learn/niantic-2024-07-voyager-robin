@@ -5,39 +5,40 @@ import java.util.Collections;
 
 public class Deck
 {
-    private ArrayList<Card> cards;
+    private ArrayList<Card> cardsInDeck;
 
+    // There is only one format for a deck in this game,
+    // thus we only need a parameterless constructor:
     public Deck()
     {
-        // build the deck of cards
-        cards = new ArrayList<>();
+        // Add ten cards of each type to the deck:
+        cardsInDeck    = new ArrayList<>();
+        String[] types = {"Plant", "Earth", "Lightning", "Water",  "Fire"};
 
-        int[] numbers = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-        String[] colors = {"Red", "Blue", "Green", "Yellow"};
-
-        for(String color : colors)
+        for(String type : types)
         {
-            for(int number : numbers)
+            for(int i = 1; i <= 10; i++)
             {
-                Card card = new Card(color,number);
-                cards.add(card);
+                Card card = new Card(type);
+                cardsInDeck.add(card);
             }
         }
     }
 
+    // Create getter for deck size:
     public int getCardCount()
     {
-        return cards.size();
+        return cardsInDeck.size();
     }
 
-    public Card takeCard()
+    // Create methods for shuffling and dealing from deck:
+    public Card dealCard()
     {
-        Card card = cards.removeFirst();
-        return card;
+        return cardsInDeck.removeFirst();
     }
 
     public void shuffle()
     {
-        Collections.shuffle(cards);
+        Collections.shuffle(cardsInDeck);
     }
 }
