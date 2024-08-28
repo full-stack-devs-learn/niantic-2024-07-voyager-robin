@@ -5,4 +5,15 @@
 
 USE Northwind;
 
+-- Customer ID is ALFKI
 
+SELECT DISTINCT prod.product_name
+FROM products AS prod
+INNER JOIN order_details AS ord_det
+ON prod.product_id = ord_det.product_id
+INNER JOIN orders AS ords
+ON ord_det.order_id = ords.order_id
+INNER JOIN customers AS cust
+ON ords.customer_id = cust.customer_id
+WHERE cust.customer_id = 'ALFKI'
+;

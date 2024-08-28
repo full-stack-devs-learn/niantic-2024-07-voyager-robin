@@ -5,3 +5,13 @@
 
 USE northwind;
 
+SELECT customers.company_name
+	 , orders.order_id
+     , orders.order_date
+     , orders.shipped_date
+FROM orders
+INNER JOIN customers 
+ON orders.customer_id = customers.customer_id
+WHERE customers.customer_id LIKE 'DRACD'
+ORDER BY orders.shipped_date DESC
+;
