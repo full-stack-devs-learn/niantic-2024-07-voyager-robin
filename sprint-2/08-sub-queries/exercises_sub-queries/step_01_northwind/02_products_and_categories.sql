@@ -14,4 +14,14 @@
 
 USE Northwind;
 
-
+SELECT (
+	SELECT category_name
+	FROM categories AS cats
+	WHERE cats.category_id = prods.category_id 
+    ) AS category_name
+	   , product_name
+       , unit_price
+FROM products AS prods
+ORDER BY category_name, product_name
+;
+     

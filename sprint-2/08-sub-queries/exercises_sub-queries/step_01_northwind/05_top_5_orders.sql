@@ -21,4 +21,17 @@
 
 USE northwind;
 
-
+SELECT order_id
+	 , ( 
+		SELECT company_name
+		FROM customers AS cust
+        WHERE cust.customer_id = ords.customer_id
+		) AS company_name
+     , (
+		SELECT SUM(unit_price * quantity * (1 - discount))
+        FROM order_details AS deets
+        WHERE deets.order_id = ords.order_id
+		) AS sales_total
+FROM orders AS ords
+ORDER BY sales_total DESC
+;
