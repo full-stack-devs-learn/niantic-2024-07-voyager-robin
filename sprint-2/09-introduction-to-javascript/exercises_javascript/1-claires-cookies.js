@@ -16,7 +16,7 @@
 
 function calculateOrderSubtotal(quantity)
 {
-	return 0;
+	return quantity * 12.95;
 }
 
 
@@ -40,7 +40,7 @@ function calculateOrderSubtotal(quantity)
 
 function calculateTax(quantity)
 {
-	return 0;
+	return +(12.95 * 5.75/100 * quantity).toFixed(2);
 }
 
 
@@ -64,6 +64,10 @@ function calculateTax(quantity)
 */
 
 // create your function here
+function calculateOrderTotal(quantity)
+{
+	return +(calculateOrderSubtotal(quantity) + calculateTax(quantity)).toFixed(2)
+}
 
 
 /*
@@ -106,7 +110,21 @@ function calculateTax(quantity)
 */
 
 // create your function here
+function placeOrder(customer, quantity)
+{
+	let subtotal  = calculateOrderSubtotal(quantity)
+	let tax       = calculateTax(quantity)
+	let total     = calculateOrderTotal(quantity)
+	const receipt = {
+		customer: customer,
+		quantity: quantity,
+		subtotal: subtotal,
+		tax: tax,
+		total: total
+		}
+	return receipt
 
+}
 
 /*
 5.	Sean's classes have all earned a cookie party. 
@@ -128,3 +146,12 @@ function calculateTax(quantity)
 */
 
 // create your function here
+function calculateCookiesNeeded(A, B, C)
+{
+	const aCookies = A * 4
+	const bCookies = B * 3
+	const cCookies = C * 2
+	const totalCookies = Math.ceil((aCookies + bCookies + cCookies) / 12)
+
+	return totalCookies
+}
