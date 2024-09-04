@@ -30,6 +30,13 @@ function addListItem(item, parent)
     addItemTitle(item, div);
     addQuantity(item, div)
 
+    div.addEventListener("click", () => {
+        div.classList.add("complete");
+    })
+    div.addEventListener("dblclick", () => {
+        div.classList.remove("complete");
+    })
+
     parent.appendChild(div)
 }
 
@@ -58,6 +65,31 @@ function addQuantity(item, parent)
     parent.appendChild(div);
 }
 
+function submitItem(event)
+{
+    event.preventDefault();
+
+    // create a new item object with name and quantity
+    const itemName  = document.getElementById("itemName").value;
+    const itemQuant = document.getElementById("quantity").value;
+    const parent    = document.getElementById("shopping-list");
+
+    const newItem = {
+      title: itemName,
+      quantity: itemQuant,
+      isComplete: false
+    }
+
+    addListItem(newItem, parent);
+    clearForm();
+}
+
+function clearForm()
+{
+document.getElementById("itemName").value = "";
+document.getElementById("quantity").value = "";
+}
+
 
 function markCompleted() {
     const listItems = document.querySelectorAll(".list-item");
@@ -67,14 +99,29 @@ function markCompleted() {
     })
 }
 
-
 // create the page load event here
 
 document.addEventListener("DOMContentLoaded", () => {
     service = new ShoppingService();
     list = service.getShoppingList();
 
+
     displayListTitle();
     displayShoppingList();
+
+
+    // create functionality for the all-completed button:
+
+   completeButton = document.getElementById("allCompleteButton");
+   completeButton.addEventListener('click', () => {
+        markCompleted()});
+
+    // create functionality for adding an item:
+    addButton = document.getElementById("addItemBtn");
+    addButton.addEventListener('click', event => {
+        submitItem(event)});
+
+
+   
 });
 
