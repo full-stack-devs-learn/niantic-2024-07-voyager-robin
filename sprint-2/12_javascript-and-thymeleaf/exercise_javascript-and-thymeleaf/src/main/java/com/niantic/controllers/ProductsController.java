@@ -122,4 +122,13 @@ public class ProductsController
 
         return "redirect:/products?catId=" + product.getCategoryId();
     }
+
+    @GetMapping("/products/category/{categoryId}")
+    public String loadProductPage(Model model,@PathVariable int categoryId)
+    {
+        var products = productDao.getProductsByCategory(categoryId);
+
+        model.addAttribute("products", products);
+        return "products/fragments/product-table";
+    }
 }

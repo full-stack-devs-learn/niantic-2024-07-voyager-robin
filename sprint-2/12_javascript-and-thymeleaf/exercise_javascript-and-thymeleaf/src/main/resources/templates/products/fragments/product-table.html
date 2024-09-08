@@ -1,0 +1,5 @@
+    <tr th:each="product:${products}" class="magenta">
+        <td th:text="${product.productId}"></td>
+        <td><a th:href="@{|/products/${product.productId}|}" th:text="${product.productName}"></a></td>
+        <td th:text="${product.unitsInStock}"></td>
+    </tr>
