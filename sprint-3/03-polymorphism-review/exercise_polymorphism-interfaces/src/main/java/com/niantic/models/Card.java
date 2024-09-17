@@ -2,6 +2,7 @@ package com.niantic.models;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class Card implements Comparable<Card>
 {
@@ -62,7 +63,92 @@ public class Card implements Comparable<Card>
     @Override
     public int compareTo(Card o)
     {
-        // todo: Exercise 1: implement Comparable<Card>
-        return 0;
+        // First, compare by suit:
+        if (this.suit.equalsIgnoreCase(o.suit))
+        {
+            // If the suit is the same, compare the point value:
+            if (this.getPointValue() == o.getPointValue())
+            {
+                // Compare by face value if point value is equal:
+                int thisValue = 0;
+                int oValue    = 0;
+
+                switch (this.faceValue.toLowerCase())
+                {
+                    case "10":
+                        thisValue = 1;
+                        break;
+                    case "j":
+                        thisValue = 2;
+                        break;
+                    case "q":
+                        thisValue = 3;
+                        break;
+                    default:
+                        thisValue = 4;
+                        break;
+                }
+                switch (o.faceValue.toLowerCase())
+                {
+                    case "10":
+                        oValue = 1;
+                        break;
+                    case "j":
+                        oValue = 2;
+                        break;
+                    case "q":
+                        oValue = 3;
+                        break;
+                    default:
+                        oValue = 4;
+                        break;
+                }
+
+                return (thisValue - oValue);
+            }
+            else
+            {
+                return (this.getPointValue() - o.getPointValue());
+            }
+        }
+        else
+        {
+            int thisPriority = 0;
+            int oPriority    = 0;
+
+            switch (this.suit.toLowerCase())
+            {
+                case "spades":
+                    thisPriority = 1;
+                    break;
+                case "hearts":
+                    thisPriority = 2;
+                    break;
+                case "diamonds":
+                    thisPriority = 3;
+                    break;
+                default:
+                    thisPriority = 4;
+                    break;
+            }
+            switch (o.suit.toLowerCase())
+            {
+                case "spades":
+                    oPriority = 1;
+                    break;
+                case "hearts":
+                    oPriority = 2;
+                    break;
+                case "diamonds":
+                    oPriority = 3;
+                    break;
+                default:
+                    oPriority = 4;
+                    break;
+            }
+
+            return (thisPriority - oPriority);
+        }
+
     }
 }
