@@ -6,6 +6,10 @@ import com.niantic.services.GradesService;
 import com.niantic.ui.UserInput;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -39,6 +43,12 @@ public class GradingApplication implements Runnable
                 case 5:
                     displayAssignmentStatistics();
                     break;
+                case 6:
+                    createStudentSummaryReport();
+                    break;
+                case 7:
+                    createAllStudentsReport();
+                    break;
                 case 0:
                     UserInput.displayMessage("Goodbye");
                     System.exit(0);
@@ -69,7 +79,6 @@ public class GradingApplication implements Runnable
         {
             System.out.println("No files/ directory found!");
         }
-
     }
 
     private void displayFileScores()
@@ -174,7 +183,6 @@ public class GradingApplication implements Runnable
         {
             System.out.println(e.getMessage());
         }
-
     }
 
     private void displayAllStudentStatistics()
@@ -195,5 +203,134 @@ public class GradingApplication implements Runnable
         return fileName.replace(".csv", "")
                         .replace("_", " ")
                         .substring(10).toUpperCase();
+    }
+
+    private void createStudentSummaryReport()
+    {
+        String choice;
+        File readFile;
+        File writeFile;
+        int lowScore     = 0;
+        int highScore    = 0;
+        double avgScore  = 0;
+        List<Integer> assignmentScore = new ArrayList<>();
+        LocalDate todayDate           = LocalDate.now();
+        DateTimeFormatter formatter   = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String dateString             = todayDate.format(formatter);
+
+        choice    = "files/" + UserInput.FileSelection();
+        readFile  = new File(choice);
+
+
+        // Read from the chosen file:
+        try(Scanner reader = new Scanner(readFile))
+        {
+            String studentName = parseStudentName(readFile.getName());
+            writeFile = new File("reports/" + dateString + "_"
+                        + studentName.replaceAll(" ", "_")
+                        .toLowerCase() + ".txt");
+
+            // Skip the header line:
+            reader.nextLine();
+
+            while(reader.hasNextLine())
+            {
+                var line = reader.nextLine();
+                var columns = line.split(",");
+                assignmentScore.add(Integer.parseInt(columns[4]));
+            }
+            lowScore  = assignmentScore.stream().min(Integer::compareTo).get();
+            highScore = assignmentScore.stream().max(Integer::compareTo).get();
+            avgScore  = assignmentScore.stream().mapToDouble(Integer::doubleValue)
+                    .average().getAsDouble();
+
+            try(PrintWriter writer = new PrintWriter(writeFile))
+            {
+                // Write the result:
+                writer.println(studentName.toLowerCase());
+                writer.println("-".repeat(30));
+                writer.println("Low Score:                 " + lowScore);
+                writer.println("High Score:                " + highScore);
+                writer.println("Average Score:             " + round(avgScore));
+            }
+            catch(IOException e)
+            {
+                System.out.println(e.getMessage());
+            }
+        }
+        catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private void createAllStudentsReport()
+    {
+        File readFile;
+        File writeFile;
+        int lowScore                  = 0;
+        int highScore                 = 0;
+        double avgScore               = 0;
+        int numberOfStudents          = 0;
+        List<Integer> assignmentScore = new ArrayList<>();
+        LocalDate todayDate           = LocalDate.now();
+        DateTimeFormatter formatter   = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String dateString             = todayDate.format(formatter);
+        File filesDir                 = new File("files");
+
+        if(filesDir.isDirectory())
+        {
+            List<String> fileNames = Arrays.stream(filesDir.list()).sorted().toList();
+
+            for (String fileName : fileNames)
+            {
+                readFile = new File(filesDir + "/" + fileName);
+                try(Scanner reader = new Scanner(readFile))
+                {
+                    writeFile = new File("reports/" + dateString
+                            + "_all_students.txt");
+
+                    // Skip the header line:
+                    reader.nextLine();
+
+                    while(reader.hasNextLine())
+                    {
+                        var line = reader.nextLine();
+                        var columns = line.split(",");
+                        assignmentScore.add(Integer.parseInt(columns[4]));
+                    }
+                    lowScore  = assignmentScore.stream().min(Integer::compareTo).get();
+                    highScore = assignmentScore.stream().max(Integer::compareTo).get();
+                    avgScore  = assignmentScore.stream().mapToDouble(Integer::doubleValue)
+                            .average().getAsDouble();
+
+                    try(PrintWriter writer = new PrintWriter(writeFile))
+                    {
+                        // Write the result:
+                        writer.println("All Assignments");
+                        writer.println("-".repeat(30));
+                        writer.println("Total Students             " + fileNames.size());
+                        writer.println("Total Assignments          " + assignmentScore.size()/fileNames.size());
+                        writer.println("-".repeat(30));
+                        writer.println("Low Score:                 " + lowScore);
+                        writer.println("High Score:                " + highScore);
+                        writer.println("Average Score:             " + round(avgScore));
+                        writer.println("-".repeat(30));
+                    }
+                    catch(IOException e)
+                    {
+                        System.out.println(e.getMessage());
+                    }
+                }
+                catch(Exception e)
+                {
+                    System.out.println(e.getMessage());
+                }
+            }
+        }
+        else
+        {
+            System.out.println("No files/ directory found!");
+        }
     }
 }

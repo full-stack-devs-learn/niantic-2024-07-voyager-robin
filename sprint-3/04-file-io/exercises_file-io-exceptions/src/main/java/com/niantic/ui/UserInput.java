@@ -19,8 +19,12 @@ public class UserInput
         System.out.println("  3) Student: display average score");
         System.out.println();
         System.out.println("  ---------- Challenge All Files ----------");
-        System.out.println("  5) All Students: display average score");
-        System.out.println("  6) All Assignments: display average score");
+        System.out.println("  4) All Students: display average score");
+        System.out.println("  5) All Assignments: display average score");
+        System.out.println();
+        System.out.println("  ---------- File Writing Exercise ----------");
+        System.out.println("  6) Create Student Summary Report");
+        System.out.println("  7) Create All Students Report");
         System.out.println();
         System.out.println("  0) Exit");
 
